@@ -20,7 +20,7 @@ class ViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
     // MARK: - Private method
@@ -36,7 +36,12 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
+        let sb = UIStoryboard(name: "ChapDetail", bundle: nil)
+        let vc = sb.instantiateInitialViewController() as! ChapDetailViewController
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
