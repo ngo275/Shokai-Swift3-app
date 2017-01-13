@@ -40,6 +40,7 @@ extension ViewController: UITableViewDelegate {
         
         let sb = UIStoryboard(name: "ChapDetail", bundle: nil)
         let vc = sb.instantiateInitialViewController() as! ChapDetailViewController
+        vc.chapNum = indexPath.row + 1
         
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -17,6 +17,8 @@
 		253186DE1E27C84900565C32 /* ChapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253186DD1E27C84900565C32 /* ChapDetailViewController.swift */; };
 		253186E11E27C88700565C32 /* ChapDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 253186E01E27C88700565C32 /* ChapDetail.storyboard */; };
 		253186E91E28565400565C32 /* chap1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186E81E28565400565C32 /* chap1.txt */; };
+		253186ED1E285A7B00565C32 /* chap2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186EC1E285A7B00565C32 /* chap2.txt */; };
+		253186EF1E285F7F00565C32 /* chap3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186EE1E285F7F00565C32 /* chap3.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		253186DD1E27C84900565C32 /* ChapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapDetailViewController.swift; sourceTree = "<group>"; };
 		253186E01E27C88700565C32 /* ChapDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChapDetail.storyboard; sourceTree = "<group>"; };
 		253186E81E28565400565C32 /* chap1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap1.txt; sourceTree = "<group>"; };
+		253186EC1E285A7B00565C32 /* chap2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap2.txt; sourceTree = "<group>"; };
+		253186EE1E285F7F00565C32 /* chap3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap3.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				253186E81E28565400565C32 /* chap1.txt */,
+				253186EC1E285A7B00565C32 /* chap2.txt */,
+				253186EE1E285F7F00565C32 /* chap3.txt */,
 			);
 			name = SampleCodes;
 			sourceTree = "<group>";
@@ -181,9 +187,11 @@
 			files = (
 				253186E91E28565400565C32 /* chap1.txt in Resources */,
 				253186E11E27C88700565C32 /* ChapDetail.storyboard in Resources */,
+				253186ED1E285A7B00565C32 /* chap2.txt in Resources */,
 				253186CF1E27BB5200565C32 /* LaunchScreen.storyboard in Resources */,
 				253186CC1E27BB5200565C32 /* Assets.xcassets in Resources */,
 				253186CA1E27BB5200565C32 /* Main.storyboard in Resources */,
+				253186EF1E285F7F00565C32 /* chap3.txt in Resources */,
 				253186D91E27BBDC00565C32 /* ChapterCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
