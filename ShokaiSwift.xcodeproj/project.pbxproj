@@ -66,8 +66,8 @@
 		253186B81E27BB5200565C32 = {
 			isa = PBXGroup;
 			children = (
-				253186C31E27BB5200565C32 /* ShokaiSwift */,
 				253186C21E27BB5200565C32 /* Products */,
+				253186C31E27BB5200565C32 /* ShokaiSwift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,11 +88,11 @@
 				253186D71E27BBC600565C32 /* Views */,
 				253186D61E27BBBD00565C32 /* Xibs */,
 				253186C41E27BB5200565C32 /* AppDelegate.swift */,
-				253186C61E27BB5200565C32 /* ViewController.swift */,
-				253186C81E27BB5200565C32 /* Main.storyboard */,
 				253186CB1E27BB5200565C32 /* Assets.xcassets */,
-				253186CD1E27BB5200565C32 /* LaunchScreen.storyboard */,
 				253186D01E27BB5200565C32 /* Info.plist */,
+				253186CD1E27BB5200565C32 /* LaunchScreen.storyboard */,
+				253186C81E27BB5200565C32 /* Main.storyboard */,
+				253186C61E27BB5200565C32 /* ViewController.swift */,
 			);
 			path = ShokaiSwift;
 			sourceTree = "<group>";
@@ -103,6 +103,7 @@
 				253186D81E27BBDC00565C32 /* ChapterCell.xib */,
 			);
 			name = Xibs;
+			path = Xibs;
 			sourceTree = "<group>";
 		};
 		253186D71E27BBC600565C32 /* Views */ = {
@@ -111,6 +112,7 @@
 				253186DA1E27BBF200565C32 /* ChapterCell.swift */,
 			);
 			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		253186DC1E27C81E00565C32 /* ViewControllers */ = {
@@ -119,6 +121,7 @@
 				253186DD1E27C84900565C32 /* ChapDetailViewController.swift */,
 			);
 			name = ViewControllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		253186DF1E27C85F00565C32 /* Storyboards */ = {
@@ -127,12 +130,15 @@
 				253186E01E27C88700565C32 /* ChapDetail.storyboard */,
 			);
 			name = Storyboards;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		253186E71E28562A00565C32 /* SampleCodes */ = {
 			isa = PBXGroup;
 			children = (
 				253186E81E28565400565C32 /* chap1.txt */,
+				253186FC1E286F0E00565C32 /* chap15.txt */,
+				253186FE1E28706500565C32 /* chap18.txt */,
 				253186EC1E285A7B00565C32 /* chap2.txt */,
 				253186EE1E285F7F00565C32 /* chap3.txt */,
 				253186F21E28679700565C32 /* chap4.txt */,
@@ -140,10 +146,9 @@
 				253186F61E2869C400565C32 /* chap6.txt */,
 				253186F81E286CA800565C32 /* chap7.txt */,
 				253186FA1E286D8500565C32 /* chap8.txt */,
-				253186FC1E286F0E00565C32 /* chap15.txt */,
-				253186FE1E28706500565C32 /* chap18.txt */,
 			);
 			name = SampleCodes;
+			path = SampleCodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +252,7 @@
 				253186C91E27BB5200565C32 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		253186CD1E27BB5200565C32 /* LaunchScreen.storyboard */ = {
@@ -255,6 +261,7 @@
 				253186CE1E27BB5200565C32 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
