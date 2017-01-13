@@ -1,0 +1,235 @@
+
+[6章]
+
+List6-1
+
+enum Direction {
+    case up, down, right, left
+    func clockwise() -> Direction {     // メソッドの定義
+        switch self {
+        case .up:    return .right  // 90°回転した方向
+        case .down:  return .left
+        case .right: return .down
+        case .left:  return .up
+        }
+    }
+}
+
+let d = Direction.up
+// d.clockwise()
+print( d.clockwise() == .down )                // false
+print( d.clockwise().clockwise() == .down )    // true
+
+
+
+
+List6-2
+
+enum Direction : Int {
+    case up = 0, right, down, left        // 時計回りに並べ直す
+    func clockwise() -> Direction {
+        let t = (self.rawValue + 1) % 4   // selfはインスタンス自体
+        return Direction(rawValue:t)!     // nilにはならない
+    }
+}
+
+let d = Direction.up
+print(d.clockwise() == .down)                 // false
+print(d.clockwise().clockwise() == .down)     // true
+
+
+
+List6-3
+
+enum Direction : Int {
+    case up = 0, right, down, left
+    func clockwise() -> Direction {
+        let t = (self.rawValue + 1) % 4
+        return Direction(rawValue:t)!
+    }
+    var horizontal: Bool {
+        switch self {
+        case .right, .left: return true
+        default: return false
+        }
+    }
+    mutating func turnBack() {
+        self = Direction(rawValue:((self.rawValue + 2) % 4))!
+    }
+}
+
+var d = Direction.left
+print(d.rawValue)
+d.turnBack()
+print(d.rawValue)
+print("horizontal: \(d.horizontal)")
+
+
+
+List6-4
+
+enum Direction : Int {
+    case up = 0, right, down, left
+    static var defaultDirection = Direction.up
+    init() {
+        self = Direction.defaultDirection
+    }
+    func clockwise() -> Direction {
+        let t = (self.rawValue + 1) % 4
+        return Direction(rawValue:t)!
+    }
+    var horizontal: Bool {
+        switch self {
+        case .right, .left: return true
+        default: return false
+        }
+    }
+    mutating func turnBack() {
+        self = Direction(rawValue:((self.rawValue + 2) % 4))!
+    }
+}
+
+Direction.defaultDirection = .right  // 右向きを初期値にする
+let e = Direction()                  // イニシャライザを使う
+let g = Direction(rawValue:1)        // 値型の列挙型のイニシャライザ
+print( e == g )                      // true
+
+
+
+List6-5
+
+enum WebColor {
+    case name(String)   // 色の名前
+    case code(String)   // 16進数によるカラーコード
+    case white, black, red, blue, green, yellow, gray
+}
+
+let indigo = WebColor.name("indigo")         // インディゴブルー
+let turquoise: WebColor = .code("#40E0D0")   // ターコイズ
+let textColor = WebColor.black
+print(indigo)
+print(turquoise)
+print(textColor)
+// turquoise == WebColor.code("#40E0D0")   // エラー
+
+
+
+List6-6
+
+enum Ticket {
+    case 切符(Int, Bool, 回数券:Bool) // 普通券：価格、小人、回数券かどうか
+    case カード(Int, Bool)            // プリペイドカード：残高、小人
+    case 敬老パス                     // 敬老パス
+}
+
+var list:[Ticket] = [
+    .切符(250, false, 回数券:false),
+    .切符(220, false, 回数券:true),
+    .敬老パス,
+    .カード(3300, false),
+    .カード(50, true)
+]
+
+for t in list {
+    switch t {
+    case let .切符(fare, flag, _):
+        print("普通券: \(fare) " + (flag ? "小人" : "大人"))
+    case .敬老パス:
+        print("敬老パス")
+    case .カード(let r, true) where r < 110:   // 小人の最低運賃
+        print("カード: 残額不足")
+    case .カード(let r, false) where r < 230:  // 大人の最低運賃
+        print("カード: 残額不足")
+    case .カード:
+        print("カード")
+    }
+}
+
+print("------------")
+
+for t in list {
+    switch t {
+    case .切符(let fare, let flag, 回数券: let sers):
+        var app = flag ? "小人" : "大人"
+        if sers { app += ", 回数券" }
+            print("普通券: \(fare) " + app)
+    case .敬老パス:
+        print("敬老パス")
+    case let .カード(r, child) where child && r < 110:   // 小人の最低運賃
+        print("カード: 残額不足(小人)")
+    case .カード(let r, _) where r < 230:  // 大人の最低運賃
+        print("カード: 残額不足(大人)")
+    case .カード:
+        print("カード")
+    }
+}
+
+
+
+List6-7
+
+enum Ticket {
+    case 切符(Int, Bool, 回数券:Bool) // 普通券：価格、小人、回数券かどうか
+    case カード(Int, Bool)            // プリペイドカード：残高、小人
+    case 敬老パス                     // 敬老パス
+    mutating func pay(_ u:Int) -> Bool {    // 改札を通過できるか
+        switch self {
+        case .切符(let fare, _, _):
+            return u <= fare                // 購入金額と比較する
+        case .カード(let point, let flag):
+            if point < u { return false }   // 支払いできない
+            self = .カード(point - u, flag) // 情報を書き換える
+        default: break
+        }
+        return true
+    }
+}
+
+let passes:[Ticket] = [
+    .カード(300, true),
+    .切符(120, true, 回数券:true),
+    .敬老パス,
+    .カード(3300, false)
+]
+
+for t in passes {
+    var tt = t
+    if tt.pay(260) {
+        if case .カード(let p, _) = tt {
+            print("OK, カード残額=\(p)")
+        }else {
+            print("OK")
+        }
+    } else { print("OUT") }
+}
+
+print("------")
+var mycard:Ticket = .カード(300, false)	// 残高300円、大人
+if mycard.pay(260) { print("OK") }    	// 残高40円になる
+if mycard.pay(220) { print("OK") }    	// 残高不足。印字しない
+
+
+
+List6-8
+
+enum メッセージ : CustomStringConvertible {
+    case 文書(String, String)               // 差出人、文書
+    case データ(String, [Int8])             // 差出人、データ列
+    indirect case 転送(String, メッセージ)  // 差出人、メッセージ
+    var description: String {
+        switch self {
+        case let .文書(from, str): return from + "(" + str + ")"
+        case let .データ(from, _): return from + "[データ]"
+        // case let .転送(from, msg): return from + "(\(msg))"
+        case let .転送(from, msg): return from + "←\(msg)"
+        }
+    }
+}
+
+let m1 = メッセージ.文書("伊藤", "休みます")
+print(m1)
+let m2 = メッセージ.転送("白石", m1)
+print(m2)
+let m3 = メッセージ.転送("山田", m2)
+print(m3)
+

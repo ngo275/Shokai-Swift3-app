@@ -1,0 +1,164 @@
+
+[5章]
+
+List5-1
+
+func maxOfInts(_ first: Int, _ params: Int...) -> Int {
+    var m = first
+    for v in params {
+        if m < v { m = v }
+    }
+    return m
+}
+
+print( maxOfInts(3, 9, 2, 6) )    // 9
+print( maxOfInts(108, 88) )       // 108
+print( maxOfInts(107) )           // 107
+// print( maxOfInts() )              // エラー。
+
+
+
+List5-2
+
+func cards(_ numbers: Int..., label: String) {
+    for n in numbers {
+        print(label + String(n), terminator:" ")
+    }
+    print("")
+}
+
+cards(3, 5, 7, 8, label:"剣")
+
+
+
+List5-3
+
+func printLong(_ s: String) {
+    for ch in s.characters {       // Character型の文字をひとつずつ取り出す
+        print(ch, terminator:" ")  // １文字と空白を表示
+    }
+    print("")
+}
+
+let str = "表ならGO、裏はSTAY。"
+printLong(str)
+
+func printLongReversed(_ s: String) {
+    for ch in s.characters.reversed() {
+        print(ch, terminator:" ")
+    }
+    print("")
+}
+
+printLongReversed(str)
+
+
+
+List5-4
+
+let s1 = "\u{30AE}モー\u{30F4}"                  // "ギモーヴ"
+let s2 = "\u{30AD}\u{3099}モー\u{30A6}\u{3099}"  // "キ゛モーウ゛"
+
+func show(_ str: String) {
+    print("Ch:\(str.characters.count), "
+    + "US:\(str.unicodeScalars.count), U16:\(str.utf16.count)")
+    var a = "／"
+    for cc in str.characters { a += "\(cc)／" }
+    print(a)
+    var b = "／"
+    for cc in str.unicodeScalars { b += "\(cc)／" }
+    print(b)
+}
+
+show( s1 )
+show( s2 )
+
+print( s1 == s2 )                       // trueになる
+
+show("秘\u{20DD}レシヒ\u{309A}")        // "(秘)レシピ"
+show("実は私は\u{1F47D}")
+
+
+
+List5-5
+
+func printLong(_ s: String) {
+    var idx = s.startIndex             // 先頭の添字を得る
+    while idx < s.endIndex {           // 末尾に至るまで
+        print(s[idx], terminator:" ")  // １文字と空白を表示
+        idx = s.index(after: idx)      // 次の添字を得る
+    }
+    print("")
+}
+
+let str = "俺、Swift\u{30D7}ロク\u{3099}ラマになります。"
+printLong(str)
+
+func printLongReversed(_ s: String) {
+    var idx = s.index(before: s.endIndex)
+    while true {
+        print(s[idx], terminator:" ")
+        if idx == s.startIndex { break }
+        idx = s.index(before: idx)
+    }
+    print("")
+}
+
+printLongReversed(str)
+
+
+
+List5-6
+
+// 部分文字列を取り出す関数
+func mySubstring(_ s:String, from f:Int, length n:Int) -> String {
+    let begin = s.index(s.startIndex, offsetBy:f)  // 先頭からf文字の位置
+    let upto = s.index(begin, offsetBy:n)          // さらにn文字後の位置
+    let range = begin ..< upto                     // 範囲を作る
+    return s[range]
+}
+
+let sample = "俺、Swift\u{30D7}ロク\u{3099}ラマになります。"
+print(mySubstring(sample, from:7, length:6))
+
+
+
+
+List5-7
+
+// 部分文字列を取り出す関数（UnicodeScalar版）
+func mySubstring2(_ s:String, from f:Int, length n:Int) -> String {
+    let u = s.unicodeScalars                       // UnicodeScalarView
+    let begin = u.index(u.startIndex, offsetBy:f)  // 先頭からf個後の位置
+    let upto = u.index(begin, offsetBy:n)          // さらにn個後の位置
+    let range = begin ..< upto                     // 範囲を作る
+    return String(u[range])   // String型のイニシャライザで文字列を得る
+}
+
+let sample = "俺、Swift\u{30D7}ロク\u{3099}ラマになります。"
+print(mySubstring2(sample, from:7, length:6))
+
+
+
+
+List5-8
+
+func mergeString(_ s1:String, _ s2:String) -> String {
+    var merged =  ""
+    var x1 = s1.startIndex          // String.Index型
+    var x2 = s2.startIndex
+    while x1 < s1.endIndex && x2 < s2.endIndex { // 大小比較が可能
+        merged.append(s1[x1])       // １文字取り出して追加する
+        merged.append(s2[x2])       // ※ s2[x1]にすると？
+        x1 = s1.index(after:x1)
+        x2 = s2.index(after:x2)     // 添字を１つ進める
+    }
+    return merged
+}
+
+let kan = "一二三四五"
+let prg = "フ\u{309A}ロク\u{3099}ラム"
+print( mergeString("12345", "ABCDE") )
+print( mergeString("12345", kan) )
+print( mergeString("12345", prg) )
+print( mergeString(kan, prg) )

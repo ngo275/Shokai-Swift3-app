@@ -1,0 +1,196 @@
+
+[8章]
+
+List8-1
+
+class Time {                        // 時間と分のみを持つクラスTime型
+    var hour = 0, min = 0
+    init(hour:Int, min:Int) {       // 全項目イニシャライザは使えない
+        self.hour = hour; self.min = min
+    }
+    func advance(min:Int) {             // mutatingは書かない
+        let m = self.min + min
+        if m >= 60 {
+            self.min = m % 60
+            let t = self.hour + m / 60
+            self.hour = t % 24
+        }else{
+            self.min = m
+        }
+    }
+    func inc() {                    // mutatingは書かない
+        self.advance(min:1);
+    }
+    func toString() -> String {
+        let h = hour < 10 ? " \(hour)":"\(hour)"
+        let m = min < 10 ? "0\(min)":"\(min)"
+        return h + ":" + m
+    }
+}
+
+let t1 = Time(hour:13, min:20)
+let t2 = t1
+print(t1.toString())   // 13:20 を出力
+t1.inc()
+print(t2.toString())   // 13:21 を出力
+
+
+
+List8-4
+
+class A : CustomStringConvertible {
+    static var className : String { return "A" }  // 計算型タイププロパティ
+    static var total = 0                          // 格納型タイププロパティ
+    class var level : Int { return 1 }            // 計算型クラスプロパティ
+    static func point() -> Int { return 1000 }    // タイプメソッド
+    class func say() -> String { return "Ah." }   // クラスメソッド
+    init() { A.total += 1 }
+    var description: String {
+        return "\(A.total): \(A.className), "
+        + "Level=\(A.level), \(A.point())pt, \(A.say())"
+    }
+}
+
+class B : A {
+    override init() { super.init(); B.total += 1 }
+    override var description: String {
+        return "\(B.total): \(B.className), "
+        + "Level=\(B.level), \(B.point())pt, \(B.say())"
+    }
+}
+
+let a = A()
+print(a)
+let b = B()
+print(b)
+
+
+
+List8-5
+
+class A : CustomStringConvertible {
+    static var className : String { return "A" }
+    static var total = 0
+    class var level : Int { return 1 }
+    static func point() -> Int { return 1000 }
+    class func say() -> String { return "Ah." }
+    init() { A.total += 1 }
+    var description: String {
+        return "\(A.total): \(A.className), "
+        + "Level=\(A.level), \(A.point())pt, \(A.say())"
+    }
+}
+
+class B : A {
+    // override static var className : String { return "B" }
+    // 定義不可. error: class var overrides a 'final' class var
+    // static var total = 0
+    // 定義不可. error: cannot override with a stored property 'total'
+    override class var level : Int { return 2 }
+    // override static func point() -> Int { return 2000 }
+    // 定義不可. error: class method overrides a 'final' class method
+    override class func say() -> String { return "Boo" }
+    override init() { super.init(); B.total += 1 }
+    override var description: String {
+        return "\(B.total): \(B.className), "
+        + "Level=\(B.level), \(B.point())pt, \(B.say())"
+    }
+}
+
+let a = A()
+print(a)
+let b = B()
+print(b)
+
+
+
+List8-6
+
+class A {
+    func show() { print("A") }
+    func who() { show() }
+}
+
+class B: A {
+    override func show() { print("B") }
+}
+
+var a = A()
+var b = B()
+a.who()
+b.who()
+
+
+
+List8-7
+
+class A {
+    class func show() { print("A") }
+    class func who() { show() }
+}
+
+class B: A {
+    override class func show() { print("B") }
+}
+
+A.who()
+B.who()
+
+
+
+List8-8
+
+class A {
+    class func show() { print("A") }
+    class func who() { show() }
+    func myclass() {
+        type(of:self).who()  // type(:of) に注意！
+    }
+}
+
+class B: A {
+    override class func show() { print("B") }
+}
+
+var a = A()
+var b = B()
+a.myclass()
+b.myclass()
+
+
+
+List8-12
+
+class ICCard {
+    static let Deposit = 500            // 定数（タイププロパティ）
+    var money = 0
+    required init(charge:Int) {         // 必須イニシャライザとする
+        money = charge - ICCard.Deposit // 保証金を差し引く
+    }
+}
+
+class Icocai : ICCard {
+    static var serial = 0               // 通し番号（タイププロパティ）
+    let idnumber: Int                   // 初期値は指定しない
+    init(id:Int, money:Int) {           // 別の指定イニシャライザ
+        idnumber = id
+        super.init(charge:money)
+    }
+    required init(charge:Int) {         // 必須イニシャライザを定義
+        Icocai.serial += 1
+        idnumber = Icocai.serial
+        super.init(charge:charge)
+    }
+}
+
+class Suiica : ICCard {                 // イニシャライザは継承される
+    var name = String()
+}
+
+var card = Suiica(charge:2000)
+print(card.money)
+
+var mycard = Icocai(charge:2000)
+print(mycard.money)
+
+

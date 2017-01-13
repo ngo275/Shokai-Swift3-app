@@ -19,6 +19,13 @@
 		253186E91E28565400565C32 /* chap1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186E81E28565400565C32 /* chap1.txt */; };
 		253186ED1E285A7B00565C32 /* chap2.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186EC1E285A7B00565C32 /* chap2.txt */; };
 		253186EF1E285F7F00565C32 /* chap3.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186EE1E285F7F00565C32 /* chap3.txt */; };
+		253186F31E28679700565C32 /* chap4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186F21E28679700565C32 /* chap4.txt */; };
+		253186F51E2868BB00565C32 /* chap5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186F41E2868BB00565C32 /* chap5.txt */; };
+		253186F71E2869C400565C32 /* chap6.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186F61E2869C400565C32 /* chap6.txt */; };
+		253186F91E286CA800565C32 /* chap7.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186F81E286CA800565C32 /* chap7.txt */; };
+		253186FB1E286D8500565C32 /* chap8.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186FA1E286D8500565C32 /* chap8.txt */; };
+		253186FD1E286F0E00565C32 /* chap15.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186FC1E286F0E00565C32 /* chap15.txt */; };
+		253186FF1E28706500565C32 /* chap18.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186FE1E28706500565C32 /* chap18.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +43,13 @@
 		253186E81E28565400565C32 /* chap1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap1.txt; sourceTree = "<group>"; };
 		253186EC1E285A7B00565C32 /* chap2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap2.txt; sourceTree = "<group>"; };
 		253186EE1E285F7F00565C32 /* chap3.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap3.txt; sourceTree = "<group>"; };
+		253186F21E28679700565C32 /* chap4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap4.txt; sourceTree = "<group>"; };
+		253186F41E2868BB00565C32 /* chap5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap5.txt; sourceTree = "<group>"; };
+		253186F61E2869C400565C32 /* chap6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap6.txt; sourceTree = "<group>"; };
+		253186F81E286CA800565C32 /* chap7.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap7.txt; sourceTree = "<group>"; };
+		253186FA1E286D8500565C32 /* chap8.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap8.txt; sourceTree = "<group>"; };
+		253186FC1E286F0E00565C32 /* chap15.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap15.txt; sourceTree = "<group>"; };
+		253186FE1E28706500565C32 /* chap18.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap18.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +135,13 @@
 				253186E81E28565400565C32 /* chap1.txt */,
 				253186EC1E285A7B00565C32 /* chap2.txt */,
 				253186EE1E285F7F00565C32 /* chap3.txt */,
+				253186F21E28679700565C32 /* chap4.txt */,
+				253186F41E2868BB00565C32 /* chap5.txt */,
+				253186F61E2869C400565C32 /* chap6.txt */,
+				253186F81E286CA800565C32 /* chap7.txt */,
+				253186FA1E286D8500565C32 /* chap8.txt */,
+				253186FC1E286F0E00565C32 /* chap15.txt */,
+				253186FE1E28706500565C32 /* chap18.txt */,
 			);
 			name = SampleCodes;
 			sourceTree = "<group>";
@@ -185,14 +206,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253186FF1E28706500565C32 /* chap18.txt in Resources */,
+				253186F31E28679700565C32 /* chap4.txt in Resources */,
 				253186E91E28565400565C32 /* chap1.txt in Resources */,
 				253186E11E27C88700565C32 /* ChapDetail.storyboard in Resources */,
+				253186F71E2869C400565C32 /* chap6.txt in Resources */,
 				253186ED1E285A7B00565C32 /* chap2.txt in Resources */,
 				253186CF1E27BB5200565C32 /* LaunchScreen.storyboard in Resources */,
+				253186F91E286CA800565C32 /* chap7.txt in Resources */,
 				253186CC1E27BB5200565C32 /* Assets.xcassets in Resources */,
+				253186FD1E286F0E00565C32 /* chap15.txt in Resources */,
+				253186F51E2868BB00565C32 /* chap5.txt in Resources */,
 				253186CA1E27BB5200565C32 /* Main.storyboard in Resources */,
 				253186EF1E285F7F00565C32 /* chap3.txt in Resources */,
 				253186D91E27BBDC00565C32 /* ChapterCell.xib in Resources */,
+				253186FB1E286D8500565C32 /* chap8.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

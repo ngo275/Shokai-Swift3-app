@@ -1,0 +1,152 @@
+
+[15章]
+
+List15-1
+
+import Foundation
+
+var current: time_t = time(nil)     // 現在時刻をtime_t型で取得
+var tnow = tm()                     // 変数を用意して初期化
+localtime_r(&current, &tnow)        // 変数tnowに情報が書き込まれる
+print("\(tnow.tm_mon + 1)月\(tnow.tm_mday)日")  // 今日の日付を表示
+
+
+
+List15-2
+
+import Foundation
+
+var buff = [Int8](repeating:0, count:26)
+var current: time_t = time(nil)
+ctime_r(&current, &buff)
+puts(buff)          // Thu Nov 07 14:55:00 2024 のように表示できる
+puts(&buff)         // & はあっても無くても同じ動作をする
+
+
+
+List15-3
+
+var buffer = [ 0.01, 10.0, 25.4, 31.9 ]
+let p = UnsafeMutablePointer<Double>(&buffer) // & は必須
+var q = UnsafePointer<Double>(buffer)         // & を付けてはいけない
+print( p.pointee, p[3] )   // "0.01 31.9" を表示
+p[2] = 100.0               // pは定数だが参照先に代入可能
+q += 2                     // ポインタを２つ分進める
+print( q.pointee )         // "100.0" を表示
+
+
+
+List15-4
+
+import Foundation
+
+var current = time(nil)
+let jnow: tm = localtime(&current).pointee   // 構造体をコピー
+print("\(jnow.tm_mon + 1)月\(jnow.tm_mday)日")
+
+let p = ctime(&current)!     // p は UnsafeMutablePointer<Int8>型
+
+// 添字を使って各文字にアクセス
+for i in 0..<25 {
+    putchar(Int32(p[i]))    // putchar()の引数はint型（Int32型）
+}                           // 最後の文字は改行文字
+
+
+
+List15-5
+
+for (n, elm) in CommandLine.arguments.enumerated() {
+    print("\(n): \"\(elm)\"")
+}
+
+print("-----------")
+
+for n in 0 ..< Int(CommandLine.argc) {
+    let arg = CommandLine.arguments[n]
+    print("\(n): \"\(arg)\"")
+}
+
+print("-----------")
+
+for i in 0 ..< Int(CommandLine.argc) {
+    if let p = CommandLine.unsafeArgv[i], let s = String(validatingUTF8:p) {
+        print("\(i): \"\(s)\"")
+    }
+}
+
+
+
+List15-6
+
+import Cocoa // このプログラムは macOS上でのみ動作します。
+
+enum ImgError : Error { case ng }   // エラーを定義しておく
+let path = "./xcodeProj03.png"      // 入力ファイル名は簡単のために決め打ち
+let url = URL(fileURLWithPath:path, isDirectory: false)  // URLを得る
+let newurl = url.deletingPathExtension().appendingPathExtension("jpg")
+do {
+    let imgdata = try Data(contentsOf: url)    // Dataに読み込む
+    guard let imgrep = NSBitmapImageRep(data: imgdata) else {
+        throw ImgError.ng           // 画像として認識できなければエラー
+    }
+    // JPEG変換のオプション。圧縮の程度と、透明色を置き換える色の指定
+    let prop:[String:Any] = [NSImageCompressionFactor: 0.5,
+    NSImageFallbackBackgroundColor:NSColor.white]
+    guard let dat = imgrep.representation(using:NSJPEGFileType, properties: prop) else {
+        throw ImgError.ng       // 変換の結果はData型で得られる
+    }
+    try dat.write(to: newurl, options: [.atomic])  // 書き出す
+    print("Done")
+} catch { }
+
+
+
+List15-7
+
+import Foundation
+
+let t = UnsafeMutablePointer<UInt8>.allocate(capacity:10)
+for i in 0 ..< 10 { t[i] = UInt8(i) }    // 0から9までを設定
+let raw = UnsafeMutableRawPointer(t)
+
+var d1 = Data(bytesNoCopy: raw, count: 10, deallocator: .none)
+// ポインタrawが指す領域をそのままDataのバイト列として使う
+for i in 0 ..< 10 { print(d1[i], terminator:" ") }
+print("")     // 0 1 2 ... 9 を表示
+var d2 =  d1
+for i in 0 ..< 10 { t[i] = UInt8(10 - i) } // 元の領域に違う値を設定
+for i in 0 ..< 10 { print(d1[i], terminator:" ") }
+for i in 0 ..< 10 { print(d2[i], terminator:" ") }
+print("")     // どちらも 10 9 8 ... 1 を表示。共有されている
+
+d2[0] = 99    // ここで d2用の領域が確保される (Copy-On-Write)
+for i in 0 ..< 10 { t[i] = UInt8(0) }     // すべて0を設定
+for i in 0 ..< 10 { print(d1[i], terminator:" ") }
+for i in 0 ..< 10 { print(d2[i], terminator:" ") }
+print("")     // 0 0 ... 0 99 9 8 7 ... 2 1 と表示される
+t.deallocate(capacity:10)    // 解放忘れのないように
+
+
+
+List15-8
+
+import Foundation
+
+var buff:[UInt8] = [ 1, 0, 2, 0, 0, 3, 0, 4 ]
+var dat = Data(bytes: buff)
+
+func sum(_ ptr: UnsafePointer<UInt16>) -> Int {
+    var total = 0
+    for i in 0 ..< 4 { total += Int(ptr[i]) }
+    return total
+}
+let n = dat.withUnsafeBytes( sum )
+print(n)
+
+dat.withUnsafeMutableBytes{(_ ptr: UnsafeMutablePointer<UInt32>) -> () in
+    for i in 0 ..< 2 {
+            ptr[i] >>= 4
+    }
+}
+for elm in dat { print(elm, terminator:" ") }
+print("")

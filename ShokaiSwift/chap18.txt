@@ -1,0 +1,18 @@
+
+不動点プログラム
+
+実行のコードと同じ文字列を出力する.
+
+typealias S=String;func +(e:S,r:Int)->S{return e+S(UnicodeScalar(r)!)}
+let n=S()+34+44+10+34,(t,w,v)=("let n=S()+34+44+10+34,(t,w,v)=(",
+"typealias S=String;func +(e:S,r:Int)->S{return e+S(UnicodeScalar(r)!)}",
+"print(w+10+t+34+t+n+w+n+v+34+41+10+v)")
+print(w+10+t+34+t+n+w+n+v+34+41+10+v)
+
+--------
+typealias S=String;func +(e:S,r:Int)->S{return e+S(UnicodeScalar(r)!)}
+let n=S()+34+44+10+34,(t,w,v)=("let n=S()+34+44+10+34,(t,w,v)=(",
+"typealias S=String;func +(e:S,r:Int)->S{return e+S(UnicodeScalar(r)!)}",
+"print(w+10+t+34+t+n+w+n+v+34+41+10+v)")
+print(w+10+t+34+t+n+w+n+v+34+41+10+v)
+--------

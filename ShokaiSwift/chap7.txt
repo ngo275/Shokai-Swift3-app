@@ -1,0 +1,181 @@
+
+[7章]
+
+List7-1
+
+nfix operator 〜 : RangeFormationPrecedence  // 二項演算子としての宣言
+
+func 〜 (n:Int, w:Int) -> String {
+    var str = String(n)  // Stringのイニシャライザで、整数を文字列にする
+    let pad = w - str.characters.count  // 左に詰める空白の個数
+    if pad > 0 {
+        str = String(repeating:" ", count:pad) + str
+    }
+    return str
+}
+
+for wid in stride(from: 2, through:6, by: 2) {
+    for i in 1...5 {
+        print(i + 7 〜 wid, terminator:"")  // 演算子「~」の優先度は + より低い
+    }
+    print("")
+}
+
+
+
+List7-2
+
+postfix operator %                  // 後置演算子として宣言
+
+postfix func % (n:Int) -> Double {  // postfix の指定は必須
+    return 0.01 * Double(n)
+}
+postfix func % (r:Double) -> Double {
+    return 0.01 * r
+}
+
+var price: Double = 19_800
+print(price * 85% * 108%)
+
+
+
+List7-3
+
+infix operator >? : AssignmentPrecedence    // 代入演算子と同じグループ
+
+func >? (lhs: inout Double, rhs: Double) {  // lhs: Left Hand Side 左辺
+    if lhs < rhs { lhs = rhs }              // rhs: Right Hand Side 右辺
+}
+
+var a = 1.22
+a >? 0.99
+a >? 3.0
+a >? -9.2
+print(a)
+
+a = 1.22
+for x in [ 0.9, 1.25, -1.0, 2.0, 0.86 ] {
+    a >? x
+}
+print(a)
+
+
+
+List7-4
+
+import Foundation    // Linux ではこれが必要
+
+enum Suit : String { // スートを列挙型で定義
+    case spade, club, diamond, heart   // 名前の文字列が実体値になる
+}
+
+func ~= (m: Suit, str: String) -> Bool {
+    let low = str.lowercased()         // 小文字に直す
+    return m.rawValue.hasPrefix(low)   // 先頭部分に一致？
+}
+
+print( Suit.spade ~= "spade" )
+print( Suit.heart ~= "H" )
+print( Suit.heart ~= "diamond" )
+let c = "dia"
+print( Suit.diamond ~= c )
+
+// ちょっとバグっぽい
+// print( (Suit.diamond, _) ~= (c, 10) )
+// if case Suit.diamond = c { print("OK") }
+
+let d = Suit.diamond
+if case d = c { print(c) }
+if case (_, d) = (10, c) { print(c) }
+
+
+
+List7-5
+
+func skip(_ cond:Bool, _ arg: @autoclosure () -> Int) {
+    if !cond { print("value = \(arg())") }
+}
+/* 短絡評価のないバージョン */
+func skipX(_ cond:Bool, _ arg:Int) {
+    if !cond { print("value = \(arg)") }
+}
+
+func highCost(_ a:Int) -> Int {
+    print("High Cost...\(a)")
+    return a * a
+}
+skip(true, highCost(1))
+skip(false, highCost(100))
+
+print("------")
+skipX(true, highCost(2))
+skipX(false, highCost(200))
+
+
+
+List7-7
+
+infix operator ⊽ : LogicalDisjunctionPrecedence    // 演算子||と同じ
+
+func ⊽ (lhs:Bool, rhs: @autoclosure () -> Bool) -> Bool {
+    if lhs { return false }  // 第１引数が真なら第２引数は評価しなくてよい
+    return !rhs()            // 第１引数が偽なら、結果は第２引数の否定
+}
+
+
+func odd(_ t:Int) -> Bool {
+    print(t)
+    return t & 1 == 1
+}
+
+print( odd(0) ⊽ odd(2) )
+print( odd(4) ⊽ odd(5) )
+print( odd(7) ⊽ odd(8) )
+print( odd(9) ⊽ odd(11) )
+
+
+
+List7-7
+
+precedencegroup RoundPrecedence {
+    higherThan: AdditionPrecedence        // +, - などのグループ
+    lowerThan: MultiplicationPrecedence   // *, / % などのグループ
+}
+infix operator %% : RoundPrecedence
+
+func %% (lhs: Int, rhs: Int) -> Int {
+    return lhs - lhs % rhs
+}
+
+print( 873151 %% 100 )
+print( 1 + 7231 %% 10 * 2 )
+
+
+
+List7-10
+
+struct Time : Comparable, CustomStringConvertible {
+    let hour, min: Int      // 定数で時刻を保持。全項目イニシャライザを使う
+    static func ==(lhs: Time, rhs: Time) -> Bool {
+        return lhs.hour == rhs.hour && lhs.min == rhs.min
+    }
+    static func <(lhs: Time, rhs: Time) -> Bool {
+        if lhs.hour == rhs.hour {
+            return lhs.min < rhs.min
+        }
+        return lhs.hour < rhs.hour
+    }
+    var description : String {
+        let h = hour < 10 ? " \(hour)":"\(hour)"
+        let m = min < 10 ? "0\(min)":"\(min)"
+        return h + ":" + m
+    }
+}
+
+let t1 = Time(hour:9, min:0)
+let t2 = Time(hour:18, min:30)
+let t3 = Time(hour:12, min:15)
+print( t1 != t2 )
+print( t1 > t3 )
+print( [t1, t2, t3].sorted() )
+print( t1 ..< t2 ~= t3 )
