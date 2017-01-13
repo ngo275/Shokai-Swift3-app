@@ -16,6 +16,7 @@
 		253186DB1E27BBF200565C32 /* ChapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253186DA1E27BBF200565C32 /* ChapterCell.swift */; };
 		253186DE1E27C84900565C32 /* ChapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253186DD1E27C84900565C32 /* ChapDetailViewController.swift */; };
 		253186E11E27C88700565C32 /* ChapDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 253186E01E27C88700565C32 /* ChapDetail.storyboard */; };
+		253186E91E28565400565C32 /* chap1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 253186E81E28565400565C32 /* chap1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		253186DA1E27BBF200565C32 /* ChapterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapterCell.swift; sourceTree = "<group>"; };
 		253186DD1E27C84900565C32 /* ChapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChapDetailViewController.swift; sourceTree = "<group>"; };
 		253186E01E27C88700565C32 /* ChapDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChapDetail.storyboard; sourceTree = "<group>"; };
+		253186E81E28565400565C32 /* chap1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chap1.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 		253186C31E27BB5200565C32 /* ShokaiSwift */ = {
 			isa = PBXGroup;
 			children = (
+				253186E71E28562A00565C32 /* SampleCodes */,
 				253186DF1E27C85F00565C32 /* Storyboards */,
 				253186DC1E27C81E00565C32 /* ViewControllers */,
 				253186D71E27BBC600565C32 /* Views */,
@@ -106,6 +109,14 @@
 				253186E01E27C88700565C32 /* ChapDetail.storyboard */,
 			);
 			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		253186E71E28562A00565C32 /* SampleCodes */ = {
+			isa = PBXGroup;
+			children = (
+				253186E81E28565400565C32 /* chap1.txt */,
+			);
+			name = SampleCodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,6 +179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253186E91E28565400565C32 /* chap1.txt in Resources */,
 				253186E11E27C88700565C32 /* ChapDetail.storyboard in Resources */,
 				253186CF1E27BB5200565C32 /* LaunchScreen.storyboard in Resources */,
 				253186CC1E27BB5200565C32 /* Assets.xcassets in Resources */,
@@ -348,6 +360,7 @@
 				253186D51E27BB5200565C32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

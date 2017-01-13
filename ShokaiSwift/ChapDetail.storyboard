@@ -12,7 +12,7 @@
         <!--Chap Detail View Controller-->
         <scene sceneID="7PY-F2-iAM">
             <objects>
-                <viewController id="jdb-iO-TpW" customClass="ChapDetailViewController" customModule="ShokaiSwift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="jdb-iO-TpW" customClass="ChapDetailViewController" customModule="ShokaiSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T3g-jR-YU5"/>
                         <viewControllerLayoutGuide type="bottom" id="UPy-g7-Nd8"/>
@@ -20,8 +20,33 @@
                     <view key="view" contentMode="scaleToFill" id="3zR-wb-XLz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RxC-3k-J72">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment>
+                                        <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <attributes>
+                                            <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="RxC-3k-J72" firstAttribute="leading" secondItem="3zR-wb-XLz" secondAttribute="leading" id="28x-Rp-sdA"/>
+                            <constraint firstItem="RxC-3k-J72" firstAttribute="top" secondItem="T3g-jR-YU5" secondAttribute="bottom" id="Eyx-0h-jyw"/>
+                            <constraint firstAttribute="trailing" secondItem="RxC-3k-J72" secondAttribute="trailing" id="QP3-Zm-7pC"/>
+                            <constraint firstItem="UPy-g7-Nd8" firstAttribute="top" secondItem="RxC-3k-J72" secondAttribute="bottom" id="dHg-xs-uqV"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="RxC-3k-J72" id="oNC-Lo-K6q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WMM-HP-QFS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,10 +10,11 @@ import UIKit
 
 class ChapDetailViewController: UIViewController {
 
+    @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        readFile()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +22,18 @@ class ChapDetailViewController: UIViewController {
 
     }
     
+    func readFile() {
+        if let filePath = Bundle.main.path(forResource: "chap1", ofType: "txt") {
+            do {
+                let str = try String(contentsOfFile: filePath,
+                                     encoding: String.Encoding.utf8)
+                textView.text = str
+                
+            }
+            catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+    }
 
 }
